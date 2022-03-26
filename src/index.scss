@@ -1,0 +1,229 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(41, 44, 51);
+  color: rgb(255, 255, 255);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  font-family: monospace;
+  text-align: center;
+  font-weight: 400;
+  color: #61dafb;
+  // background-color: #282c34;
+  background-color: #35383fa1;
+  font-size: 27px;
+  padding: 20px 0;
+}
+
+.inputField {
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.mainWrapper {
+  padding: 0 10px;
+}
+
+.mainContent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.inputField {
+  padding: 0 10px;
+  display: flex;
+
+  input[type="text"] {
+    max-width: 400px;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 0;
+    display: inline-block;
+    border: 1px solid #222;
+    outline: none;
+  }
+
+  .uploadInput {
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .or {
+    align-items: center;
+    display: inline-flex;
+    padding: 0 20px;
+  }
+
+  .uploadImage {
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #61dafb;
+    color: rgb(27, 26, 26);
+    display: inline-block;
+    border: 0;
+    border-radius: 6%;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+.imageHolder {
+  width: 20%;
+  display: block;
+  flex: 0 0 20%;
+  max-width: 900px;
+  // height: 70vmin;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.resultsField {
+  padding: 30px;
+  margin: 30px;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    padding: 0;
+  }
+
+  .result {
+    border: 1px solid #333;
+    margin: 0 0 10px;
+    padding: 10px;
+
+    &:first-of-type {
+      border-color: #333;
+      background-color: #333;
+
+      .name {
+        color: #fff;
+      }
+      .accuracy {
+        color: #dfdfdf;
+      }
+    }
+
+    .name {
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .accuracy {
+      display: block;
+      font-weight: 300;
+
+      .bestGuess {
+        background: #fff;
+        padding: 2px 6px;
+        color: #333;
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+.button {
+  padding: 12px 17px;
+  font-size: 18px;
+  background: #61dafb;
+  color: rgb(22, 21, 21);
+  display: inline-block;
+  border: 0;
+  margin-left: 20px;
+
+  cursor: pointer;
+  border-radius: 5%;
+  outline: none;
+}
+
+.recentPredictions {
+  margin: 40px 0 0;
+  background-color: #35383fa1;
+  padding: 10px;
+
+  h2 {
+    color: #61dafb;
+    font-weight: 400;
+    font-family: monospace;
+    font-size: 26px;
+    margin: 10px 0;
+  }
+
+  .recentImages {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px;
+  }
+
+  .recentPrediction {
+    margin: 15px;
+    cursor: pointer;
+
+    @media (max-width: 1100px) {
+      // flex: 0 0 20%;
+    }
+
+    @media (max-width: 870px) {
+      flex: 0 0 33.3%;
+    }
+
+    @media (max-width: 700px) {
+      flex: 0 0 50%;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      justify-content: space-between;
+
+      @media (max-width: 700px) {
+        // height: 260px;
+      }
+    }
+  }
+}
