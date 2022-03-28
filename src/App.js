@@ -7,7 +7,7 @@ function App() {
   const [model, setModel] = useState(null)
   const [imgURL, setImgURL] = useState(null);
   const [results, setResults] = useState([])
-  const [history, setHistory] = useState([])
+  const [imgHistory, setImgHistory] = useState([])
 
   const imageRef = useRef()
   const textInputRef = useRef()
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (imgURL) {
-      setHistory(() => [imgURL, ...history])
+      setImgHistory(() => [imgURL, ...imgHistory])
     }
   }, [imgURL])
 
@@ -27,6 +27,7 @@ function App() {
   const loadModel = async () => {
     setIsLoading(true)
     try {
+      // load model
       const model = await mobilenet.load()
       setModel(model)
       setIsLoading(false)
@@ -43,13 +44,14 @@ function App() {
 
   }
 
-  const identify = async () => {
+  const classifyImg = async () => {
     textInputRef.current.value = ''
     const results = await model.classify(imageRef.current)
+    console.log(results)
     setResults(results)
   }
 
-  const handleOnChange = (e) => {
+  const handleChange = (e) => {
     setImgURL(e.target.value)
     setResults([])
   }
@@ -65,19 +67,19 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='header'>Identificare Imagini</h1>
+      <h1 className='header'>Clasificare Imagini cu modelul mobilenet</h1>
       <div className='inputField'>
         <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
         <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
         <span className='or'>OR</span>
-        <input type="text" placeholder='Enter image URL' ref={textInputRef} onChange={handleOnChange} />
+        <input type="text" placeholder='Enter image URL' ref={textInputRef} onChange={handleChange} />
 
-        {imgURL && <button className='button' onClick={identify}>Identify Image</button>}
+        {imgURL && <button className='button' onClick={classifyImg}>Identify Image</button>}
       </div>
       <div className="mainWrapper">
         <div className="mainContent">
-          <div className="imageHolder">
-            {imgURL && <img src={imgURL} alt="Image Preview" crossOrigin="anonymous" ref={imageRef} />}
+          <div className="imageField">
+            {imgURL && <img src={imgURL} alt=" Preview" crossOrigin="anonymous" ref={imageRef} />}
           </div>
           {results.length > 0 && <div className='resultsField'>
             {results.map((result, index) => {
@@ -91,10 +93,10 @@ function App() {
           </div>}
         </div>
       </div>
-      {history.length > 0 && <div className="recentPredictions">
+      {imgHistory.length > 0 && <div className="recentPredictions">
         <h2>Imagini recente</h2>
         <div className="recentImages">
-          {history.map((image, index) => {
+          {imgHistory.map((image, index) => {
             return (
               <div className="recentPrediction" key={`${image}${index}`}>
                 <img src={image} alt='Recent Prediction' onClick={() => setImgURL(image)} />
