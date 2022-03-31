@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import * as mobilenet from "@tensorflow-models/mobilenet";
 
+// https://i.differencevs.com/preview/animals/6858143-difference-between-collie-and-border-collie.jpg
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -67,14 +68,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='header'>Clasificare Imagini cu modelul mobilenet</h1>
+      <h1 className='header'>Recunoașterea obiectelor din imagini</h1>
       <div className='inputField'>
         <input type='file' accept='image/*' capture='camera' className='uploadInput' onChange={uploadImage} ref={fileInputRef} />
-        <button className='uploadImage' onClick={triggerUpload}>Upload Image</button>
-        <span className='or'>OR</span>
-        <input type="text" placeholder='Enter image URL' ref={textInputRef} onChange={handleChange} />
+        <button className='uploadImage' onClick={triggerUpload}>Incarca Imaginea</button>
+        <span className='or'>sau</span>
+        <input type="text" placeholder='Introduceți adresa URL a imaginii' ref={textInputRef} onChange={handleChange} />
 
-        {imgURL && <button className='button' onClick={classifyImg}>Identify Image</button>}
+        {imgURL && <button className='button' onClick={classifyImg}>Identifica Imaginea</button>}
       </div>
       <div className="mainWrapper">
         <div className="mainContent">
@@ -86,7 +87,7 @@ function App() {
               return (
                 <div className='result' key={result.className}>
                   <span className='name'>{result.className}</span>
-                  <span className='accuracy'>Accuracy level: {(result.probability * 100).toFixed(2)}% </span>
+                  <span className='accuracy'>Probabilitate: {(result.probability * 100).toFixed(2)}% </span>
                 </div>
               )
             })}
